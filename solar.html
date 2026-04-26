@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar System (Blender) — Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Satisfy&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        script: ['Satisfy', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .video-slot { border: 2px dashed rgba(255,255,255,0.08); }
+        .video-slot:hover { border-color: rgba(245,158,11,0.3); }
+    </style>
+</head>
+<body class="bg-[#0b0b0c] text-white font-sans">
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0b0b0c]/80 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
+            <a href="index.html" class="font-script text-2xl text-amber-500 hover:text-amber-400 transition-colors">Portfolio</a>
+            <div class="hidden md:flex items-center gap-1">
+                <a href="index.html" class="px-4 py-2 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Home</a>
+                <a href="solar.html" class="px-4 py-2 rounded-full text-sm font-medium text-white bg-white/5 transition-all">Solar System (Blender)</a>
+                <a href="rotoscoping.html" class="px-4 py-2 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">1 Minute Rotoscoping</a>
+            </div>
+            <button id="menuBtn" onclick="toggleMenu()" class="md:hidden text-slate-300 hover:text-white transition-colors">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden border-t border-white/5 px-6 py-4 space-y-1">
+            <a href="index.html" class="block w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">Home</a>
+            <a href="solar.html" class="block w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-white bg-white/5 transition-all">Solar System (Blender)</a>
+            <a href="rotoscoping.html" class="block w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all">1 Minute Rotoscoping</a>
+        </div>
+    </nav>
+
+    <main class="pt-16">
+
+        <!-- ========== SOLAR SYSTEM (BLENDER) ========== -->
+        <section>
+            <div class="max-w-7xl mx-auto px-6 lg:px-12 py-16 space-y-20">
+
+                <!-- Header -->
+                <div>
+                    <p class="text-xs font-medium uppercase tracking-[0.2em] text-amber-500 mb-3">Blender Project</p>
+                    <h1 class="text-4xl md:text-5xl font-medium tracking-tight">Solar System</h1>
+                </div>
+
+                <!-- Final Video (All Planets) -->
+                <div>
+                    <h2 class="text-lg font-medium tracking-tight mb-6 flex items-center gap-3">
+                        <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span> Final Output — Full Solar System
+                    </h2>
+                    <div class="flex flex-col lg:flex-row gap-8">
+                        <div class="lg:w-5/12">
+                            <p class="text-slate-400 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <p class="text-slate-400 leading-relaxed mt-4">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                        </div>
+                        <div class="lg:w-7/12">
+                            <!-- ============================================ -->
+                            <!-- PASTE FULL SOLAR SYSTEM YOUTUBE IFRAME HERE  -->
+                            <!-- ============================================ -->
+                            <div class="video-slot w-full aspect-video rounded-xl flex flex-col items-center justify-center text-slate-600 transition-colors duration-300">
+                                <i data-lucide="youtube" class="w-10 h-10 mb-2 opacity-50"></i>
+                                <p class="text-xs opacity-50">Paste Full Solar System YouTube Embed Here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Age Calculator -->
+                <div>
+                    <h2 class="text-lg font-medium tracking-tight mb-2 flex items-center gap-3">
+                        <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span> Planetary Age Calculator
+                    </h2>
+                    <p class="text-slate-400 text-sm mb-6 ml-5">Enter your age in Earth years to see how old you'd be on every planet.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 mb-10">
+                        <input type="number" id="ageInput" min="0" max="200" placeholder="Enter your age (e.g. 20)" class="w-full sm:w-72 bg-[#1a1a1a] border border-white/5 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-amber-300/50 focus:border-amber-300/30 transition-all">
+                        <button onclick="calculateAge()" class="px-8 py-3 bg-amber-500 text-[#0b0b0c] text-sm font-semibold rounded-lg hover:bg-amber-400 transition-colors active:scale-[0.98]" style="box-shadow: 0 10px 15px -3px rgba(245,158,11,0.2);">Calculate</button>
+                    </div>
+
+                    <!-- Planet Results (shown after calculation) -->
+                    <div id="planetResults" class="hidden space-y-5"></div>
+                </div>
+
+                <!-- Planet Information -->
+                <div>
+                    <h2 class="text-lg font-medium tracking-tight mb-8 flex items-center gap-3">
+                        <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span> Planet Information
+                    </h2>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" id="planetInfoGrid"></div>
+                </div>
+
+                <!-- Tools & Software -->
+                <div>
+                    <h2 class="text-lg font-medium tracking-tight mb-6 flex items-center gap-3">
+                        <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span> Tools & Software Used
+                    </h2>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-[#141414] border border-white/5 rounded-full text-sm text-slate-300 hover:border-amber-500/30 transition-colors">Blender</span>
+                        <span class="px-4 py-2 bg-[#141414] border border-white/5 rounded-full text-sm text-slate-300 hover:border-amber-500/30 transition-colors">Adobe Premiere Pro</span>
+                        <span class="px-4 py-2 bg-[#141414] border border-white/5 rounded-full text-sm text-slate-300 hover:border-amber-500/30 transition-colors">Substance Painter</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="border-t border-white/5 py-8 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-600">
+            <p class="font-script text-lg text-amber-500/60">Portfolio</p>
+            <p>Lorem ipsum dolor sit amet — Multimedia & Authoring</p>
+        </div>
+    </footer>
+
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        function toggleMenu() {
+            const m = document.getElementById('mobileMenu');
+            m.classList.toggle('hidden');
+            const icon = m.classList.contains('hidden') ? 'menu' : 'x';
+            document.getElementById('menuBtn').innerHTML = `<i data-lucide="${icon}" class="w-6 h-6"></i>`;
+            lucide.createIcons();
+        }
+
+        // ── Planet Data ──
+        const planets = [
+            { name: 'Mercury', orbitalDays: 88,     distanceKm: '57.9 million km',   color: '#a8a8a8', fact: 'Smallest planet in the solar system and closest to the Sun. It has no atmosphere and extreme temperature swings.' },
+            { name: 'Venus',   orbitalDays: 225,    distanceKm: '108.2 million km',  color: '#e8cfa0', fact: 'The hottest planet due to its thick CO₂ atmosphere. It rotates backwards compared to most planets.' },
+            { name: 'Earth',   orbitalDays: 365.25, distanceKm: '149.6 million km',  color: '#4da6ff', fact: 'The only known planet to harbor life. Its surface is 71% water.' },
+            { name: 'Mars',    orbitalDays: 687,    distanceKm: '227.9 million km',  color: '#e07050', fact: 'Known as the Red Planet due to iron oxide on its surface. Home to Olympus Mons, the tallest volcano.' },
+            { name: 'Jupiter', orbitalDays: 4333,   distanceKm: '778.5 million km',  color: '#d4a574', fact: 'The largest planet with a mass greater than all other planets combined. Famous for the Great Red Spot.' },
+            { name: 'Saturn',  orbitalDays: 10759,  distanceKm: '1,434 million km',  color: '#e8d5a0', fact: 'Best known for its extensive ring system made of ice and rock. It is less dense than water.' },
+            { name: 'Uranus',  orbitalDays: 30687,  distanceKm: '2,871 million km',  color: '#7fdbda', fact: 'An ice giant that rotates on its side with an axial tilt of 98°. It has 27 known moons.' },
+            { name: 'Neptune', orbitalDays: 60190,  distanceKm: '4,495 million km',  color: '#5070e0', fact: 'The farthest planet from the Sun with the strongest winds in the solar system, reaching 2,100 km/h.' },
+        ];
+
+        // ── Age Calculator ──
+        function calculateAge() {
+            const input = document.getElementById('ageInput');
+            const age = parseFloat(input.value);
+            if (!age || age <= 0 || age > 200) {
+                input.classList.add('ring-1', 'ring-red-500/50');
+                input.setAttribute('placeholder', 'Please enter a valid age (1–200)');
+                setTimeout(() => { input.classList.remove('ring-1', 'ring-red-500/50'); input.setAttribute('placeholder', 'Enter your age (e.g. 20)'); }, 2500);
+                return;
+            }
+            const container = document.getElementById('planetResults');
+            container.classList.remove('hidden');
+            container.innerHTML = '';
+
+            const earthDays = age * 365.25;
+
+            planets.forEach((p, i) => {
+                const ageOnPlanet = earthDays / p.orbitalDays;
+                const orbitalYears = (p.orbitalDays / 365.25).toFixed(2);
+                const card = document.createElement('div');
+                card.className = 'bg-[#121212] border border-white/5 rounded-2xl p-5 md:p-6 hover:border-white/10 transition-colors duration-300';
+                card.style.animationDelay = (i * 60) + 'ms';
+                card.innerHTML = `
+                    <div class="flex flex-col md:flex-row gap-5 md:gap-8">
+                        <div class="md:w-2/5 shrink-0">
+                            <!-- ============================================ -->
+                            <!-- PASTE ${p.name.toUpperCase()} VIDEO IFRAME HERE -->
+                            <!-- ============================================ -->
+                            <div class="video-slot w-full aspect-video rounded-xl flex flex-col items-center justify-center text-slate-600 transition-colors duration-300">
+                                <i data-lucide="youtube" class="w-8 h-8 mb-1 opacity-50"></i>
+                                <p class="text-xs opacity-50">Paste ${p.name} Video Embed</p>
+                            </div>
+                        </div>
+                        <div class="md:w-3/5 flex flex-col justify-center">
+                            <div class="flex items-center gap-2.5 mb-4">
+                                <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${p.color}"></span>
+                                <h3 class="text-lg font-medium tracking-tight" style="color:${p.color}">${p.name}</h3>
+                            </div>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex items-baseline justify-between gap-4">
+                                    <span class="text-slate-500 shrink-0">Age</span>
+                                    <span class="text-white font-medium text-right">${ageOnPlanet.toFixed(2)} ${p.name} years</span>
+                                </div>
+                                <div class="h-px bg-white/5"></div>
+                                <div class="flex items-baseline justify-between gap-4">
+                                    <span class="text-slate-500 shrink-0">Revolutions</span>
+                                    <span class="text-white font-medium text-right">${ageOnPlanet.toFixed(2)}</span>
+                                </div>
+                                <div class="h-px bg-white/5"></div>
+                                <div class="flex items-baseline justify-between gap-4">
+                                    <span class="text-slate-500 shrink-0">Orbit Time</span>
+                                    <span class="text-white font-medium text-right">${p.orbitalDays.toLocaleString()} days (${orbitalYears} yrs)</span>
+                                </div>
+                                <div class="h-px bg-white/5"></div>
+                                <div class="flex items-baseline justify-between gap-4">
+                                    <span class="text-slate-500 shrink-0">Distance from Sun</span>
+                                    <span class="text-white font-medium text-right">${p.distanceKm}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+            setTimeout(() => container.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+        }
+
+        // ── Generate Planet Info Cards ──
+        function generatePlanetInfo() {
+            const grid = document.getElementById('planetInfoGrid');
+            planets.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'bg-[#121212] border border-white/5 rounded-2xl p-5 hover:border-white/10 transition-colors duration-300';
+                card.innerHTML = `
+                    <div class="flex items-center gap-2.5 mb-3">
+                        <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${p.color}"></span>
+                        <h3 class="text-base font-medium tracking-tight">${p.name}</h3>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-4">${p.fact}</p>
+                    <div class="space-y-1.5 text-xs text-slate-500">
+                        <div class="flex justify-between"><span>Orbit</span><span class="text-slate-300">${p.orbitalDays.toLocaleString()} days</span></div>
+                        <div class="flex justify-between"><span>Distance</span><span class="text-slate-300">${p.distanceKm}</span></div>
+                    </div>`;
+                grid.appendChild(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            generatePlanetInfo();
+
+            document.getElementById('ageInput').addEventListener('keydown', e => {
+                if (e.key === 'Enter') calculateAge();
+            });
+        });
+    </script>
+
+</body>
+</html>
