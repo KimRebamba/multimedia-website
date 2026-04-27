@@ -90,6 +90,7 @@
                     <div class="flex flex-col sm:flex-row gap-4 mb-10">
                         <input type="number" id="ageInput" min="0" max="200" placeholder="Enter your age (e.g. 20)" class="w-full sm:w-72 bg-[#1a1a1a] border border-white/5 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-amber-300/50 focus:border-amber-300/30 transition-all">
                         <button onclick="calculateAge()" class="px-8 py-3 bg-amber-500 text-[#0b0b0c] text-sm font-semibold rounded-lg hover:bg-amber-400 transition-colors active:scale-[0.98]" style="box-shadow: 0 10px 15px -3px rgba(245,158,11,0.2);">Calculate</button>
+                        <button id="closeResultsBtn" onclick="closeAgeResults()" class="hidden px-8 py-3 bg-white/5 border border-white/10 text-white text-sm font-semibold rounded-lg hover:bg-white/10 transition-colors active:scale-[0.98]">Close results</button>
                     </div>
 
                     <!-- Planet Results (shown after calculation) -->
@@ -112,7 +113,7 @@
                     <div class="flex flex-wrap gap-3">
                         <span class="px-4 py-2 bg-[#141414] border border-white/5 rounded-full text-sm text-slate-300 hover:border-amber-500/30 transition-colors">Blender</span>
                         <span class="px-4 py-2 bg-[#141414] border border-white/5 rounded-full text-sm text-slate-300 hover:border-amber-500/30 transition-colors">Adobe Premiere Pro</span>
-                        <span class="px-4 py-2 bg-[#141414] border border-white/5 rounded-full text-sm text-slate-300 hover:border-amber-500/30 transition-colors">Substance Painter</span>
+                        
                     </div>
                 </div>
 
@@ -123,9 +124,9 @@
 
     <!-- ========== FOOTER ========== -->
     <footer class="border-t border-white/5 py-8 px-6">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-600">
-            <p class="font-script text-lg text-amber-500/60">Portfolio</p>
-            <p>Lorem ipsum dolor sit amet — Multimedia & Authoring</p>
+        <div class="max-w-7xl mx-auto text-center text-sm text-slate-500 space-y-1">
+            <p>Copyright © 2026 Kim Carvie Fernandez Rebamba.</p>
+            <p>Section BSIT-S-2A-T — Technological University Of The Philippines - Taguig. This is for a school project.</p>
         </div>
     </footer>
 
@@ -153,10 +154,38 @@
             { name: 'Pluto',   orbitalDays: 90560,  distanceKm: '5,906 million km',  color: '#c7c2b8', fact: 'A dwarf planet in the Kuiper Belt. Pluto has a thin atmosphere and a famous heart-shaped region called Sputnik Planitia.' },
         ];
 
+        const infoBodies = [
+            ...planets,
+            { name: 'Moon', orbitalDays: 27.32, distanceKm: '149.6 million km', color: '#b8bcc6', fact: "Earth’s only natural satellite. It stabilizes Earth’s axial tilt and drives ocean tides." },
+            { name: 'Sun', orbitalDays: 0, distanceKm: '0 km', color: '#f59e0b', fact: 'The star at the center of our solar system. It contains 99.8% of the solar system’s mass and powers life on Earth.' },
+        ];
+
         const planetVideos = {
-            Neptune: 'blender-videos/neptune.mp4',
-            Pluto: 'blender-videos/Pluto.mp4',
+            Earth: 'blender-videos/earth.mp4',
+            Moon: 'blender-videos/moon.mp4',
+            Sun: 'blender-videos/sun.mp4',
         };
+
+        const planetPython = {
+            Earth: [
+                { label: 'animate-earth.py', file: 'blender-python/earth-animation-only.py' },
+            ],
+            Moon: [
+                { label: 'animate-moon.py', file: 'blender-python/moon-animation-only.py' },
+            ],
+            Sun: [
+                { label: 'animate-sun.py', file: 'blender-python/sun-animation-only.py' },
+                { label: 'create-sun.py', file: 'blender-python/sun-creation.py' },
+            ],
+        };
+
+        function closeAgeResults() {
+            const container = document.getElementById('planetResults');
+            container.classList.add('hidden');
+            container.innerHTML = '';
+            document.getElementById('closeResultsBtn').classList.add('hidden');
+            document.getElementById('ageInput').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
 
         // ── Age Calculator ──
         function calculateAge() {
@@ -171,6 +200,7 @@
             const container = document.getElementById('planetResults');
             container.classList.remove('hidden');
             container.innerHTML = '';
+            document.getElementById('closeResultsBtn').classList.remove('hidden');
 
             const earthDays = age * 365.25;
 
@@ -192,6 +222,22 @@
                         <div class="video-slot w-full aspect-video rounded-xl flex flex-col items-center justify-center text-slate-600 transition-colors duration-300">
                             <i data-lucide="youtube" class="w-8 h-8 mb-1 opacity-50"></i>
                         </div>`;
+
+                const pythonFiles = planetPython[p.name];
+                const pythonDownloads = pythonFiles?.length
+                    ? `
+                        <div class="mt-6 pt-4 border-t border-white/5">
+                            <div class="text-xs font-medium uppercase tracking-[0.2em] text-slate-500 mb-2">Python (Blender)</div>
+                            <div class="flex flex-wrap gap-2">
+                                ${pythonFiles.map(x => `
+                                    <a href="${x.file}" download class="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-white/5 hover:bg-white/10 transition-colors">
+                                        <i data-lucide="download" class="w-4 h-4"></i>
+                                        <span>Download ${x.label}</span>
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>`
+                    : '';
                 const card = document.createElement('div');
                 card.className = 'bg-[#121212] border border-white/5 rounded-2xl p-5 md:p-6 hover:border-white/10 transition-colors duration-300';
                 card.style.animationDelay = (i * 60) + 'ms';
@@ -226,6 +272,7 @@
                                     <span class="text-white font-medium text-right">${p.distanceKm}</span>
                                 </div>
                             </div>
+                            ${pythonDownloads}
                         </div>
                     </div>`;
                 container.appendChild(card);
@@ -237,10 +284,36 @@
         // ── Generate Planet Info Cards ──
         function generatePlanetInfo() {
             const grid = document.getElementById('planetInfoGrid');
-            planets.forEach(p => {
+            infoBodies.forEach(p => {
+                const pythonFiles = planetPython[p.name];
+                const pythonDownloads = pythonFiles?.length
+                    ? `
+                        <div class="mt-4 pt-4 border-t border-white/5">
+                            <div class="text-xs font-medium uppercase tracking-[0.2em] text-slate-500 mb-2">Python (Blender)</div>
+                            <div class="flex flex-wrap gap-2">
+                                ${pythonFiles.map(x => `
+                                    <a href="${x.file}" download class="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-white/5 hover:bg-white/10 transition-colors">
+                                        <i data-lucide="download" class="w-4 h-4"></i>
+                                        <span>Download ${x.label}</span>
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>`
+                    : '';
+
+                const media = planetVideos[p.name]
+                    ? `
+                        <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/5 bg-[#0b0b0c] mb-4">
+                            <video class="absolute inset-0 w-full h-full" controls preload="metadata">
+                                <source src="${planetVideos[p.name]}" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>`
+                    : '';
                 const card = document.createElement('div');
                 card.className = 'bg-[#121212] border border-white/5 rounded-2xl p-5 hover:border-white/10 transition-colors duration-300';
                 card.innerHTML = `
+                    ${media}
                     <div class="flex items-center gap-2.5 mb-3">
                         <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${p.color}"></span>
                         <h3 class="text-base font-medium tracking-tight">${p.name}</h3>
@@ -249,7 +322,8 @@
                     <div class="space-y-1.5 text-xs text-slate-500">
                         <div class="flex justify-between"><span>Orbit</span><span class="text-slate-300">${p.orbitalDays.toLocaleString()} days</span></div>
                         <div class="flex justify-between"><span>Distance</span><span class="text-slate-300">${p.distanceKm}</span></div>
-                    </div>`;
+                    </div>
+                    ${pythonDownloads}`;
                 grid.appendChild(card);
             });
         }
