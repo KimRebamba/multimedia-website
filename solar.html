@@ -76,7 +76,6 @@
                             <!-- ============================================ -->
                             <div class="video-slot w-full aspect-video rounded-xl flex flex-col items-center justify-center text-slate-600 transition-colors duration-300">
                                 <i data-lucide="youtube" class="w-10 h-10 mb-2 opacity-50"></i>
-                                <p class="text-xs opacity-50">Paste Full Solar System YouTube Embed Here</p>
                             </div>
                         </div>
                     </div>
@@ -87,7 +86,7 @@
                     <h2 class="text-lg font-medium tracking-tight mb-2 flex items-center gap-3">
                         <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span> Planetary Age Calculator
                     </h2>
-                    <p class="text-slate-400 text-sm mb-6 ml-5">Enter your age in Earth years to see how old you'd be on every planet.</p>
+                    <p class="text-slate-400 text-sm mb-6 ml-5">Enter your age in Earth years to see how old you'd be on every planet (including Pluto). Embed videos inside each planet's card</p>
                     <div class="flex flex-col sm:flex-row gap-4 mb-10">
                         <input type="number" id="ageInput" min="0" max="200" placeholder="Enter your age (e.g. 20)" class="w-full sm:w-72 bg-[#1a1a1a] border border-white/5 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-amber-300/50 focus:border-amber-300/30 transition-all">
                         <button onclick="calculateAge()" class="px-8 py-3 bg-amber-500 text-[#0b0b0c] text-sm font-semibold rounded-lg hover:bg-amber-400 transition-colors active:scale-[0.98]" style="box-shadow: 0 10px 15px -3px rgba(245,158,11,0.2);">Calculate</button>
@@ -151,7 +150,13 @@
             { name: 'Saturn',  orbitalDays: 10759,  distanceKm: '1,434 million km',  color: '#e8d5a0', fact: 'Best known for its extensive ring system made of ice and rock. It is less dense than water.' },
             { name: 'Uranus',  orbitalDays: 30687,  distanceKm: '2,871 million km',  color: '#7fdbda', fact: 'An ice giant that rotates on its side with an axial tilt of 98°. It has 27 known moons.' },
             { name: 'Neptune', orbitalDays: 60190,  distanceKm: '4,495 million km',  color: '#5070e0', fact: 'The farthest planet from the Sun with the strongest winds in the solar system, reaching 2,100 km/h.' },
+            { name: 'Pluto',   orbitalDays: 90560,  distanceKm: '5,906 million km',  color: '#c7c2b8', fact: 'A dwarf planet in the Kuiper Belt. Pluto has a thin atmosphere and a famous heart-shaped region called Sputnik Planitia.' },
         ];
+
+        const planetVideos = {
+            Neptune: 'blender-videos/neptune.mp4',
+            Pluto: 'blender-videos/Pluto.mp4',
+        };
 
         // ── Age Calculator ──
         function calculateAge() {
@@ -172,19 +177,28 @@
             planets.forEach((p, i) => {
                 const ageOnPlanet = earthDays / p.orbitalDays;
                 const orbitalYears = (p.orbitalDays / 365.25).toFixed(2);
+                const media = planetVideos[p.name]
+                    ? `
+                        <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/5 bg-[#0b0b0c]">
+                            <video class="absolute inset-0 w-full h-full" controls preload="metadata">
+                                <source src="${planetVideos[p.name]}" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>`
+                    : `
+                        <!-- ============================================ -->
+                        <!-- PASTE ${p.name.toUpperCase()} VIDEO IFRAME HERE -->
+                        <!-- ============================================ -->
+                        <div class="video-slot w-full aspect-video rounded-xl flex flex-col items-center justify-center text-slate-600 transition-colors duration-300">
+                            <i data-lucide="youtube" class="w-8 h-8 mb-1 opacity-50"></i>
+                        </div>`;
                 const card = document.createElement('div');
                 card.className = 'bg-[#121212] border border-white/5 rounded-2xl p-5 md:p-6 hover:border-white/10 transition-colors duration-300';
                 card.style.animationDelay = (i * 60) + 'ms';
                 card.innerHTML = `
                     <div class="flex flex-col md:flex-row gap-5 md:gap-8">
                         <div class="md:w-2/5 shrink-0">
-                            <!-- ============================================ -->
-                            <!-- PASTE ${p.name.toUpperCase()} VIDEO IFRAME HERE -->
-                            <!-- ============================================ -->
-                            <div class="video-slot w-full aspect-video rounded-xl flex flex-col items-center justify-center text-slate-600 transition-colors duration-300">
-                                <i data-lucide="youtube" class="w-8 h-8 mb-1 opacity-50"></i>
-                                <p class="text-xs opacity-50">Paste ${p.name} Video Embed</p>
-                            </div>
+                            ${media}
                         </div>
                         <div class="md:w-3/5 flex flex-col justify-center">
                             <div class="flex items-center gap-2.5 mb-4">
