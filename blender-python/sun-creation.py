@@ -9,7 +9,7 @@ bpy.ops.mesh.primitive_uv_sphere_add(
 sun = bpy.context.object
 sun.name = "Sun-Planet"
 
-# create glowing material
+# create glowing glowing glowing glowing glowing
 mat = bpy.data.materials.new(name="SunMaterial")
 mat.use_nodes = True
 

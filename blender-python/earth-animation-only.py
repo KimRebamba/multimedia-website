@@ -16,7 +16,7 @@ bpy.context.scene.frame_set(250)
 earth.rotation_euler[2] = math.radians(360)
 earth.keyframe_insert(data_path="rotation_euler", index=2)
 
-# make linear motion
+# linear motion
 action = earth.animation_data.action
 for fcurve in action.fcurves:
     for key in fcurve.keyframe_points:
