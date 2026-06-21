@@ -79,7 +79,7 @@
                             <div class="flex-1 min-w-0">
                                 <span class="text-[11px] font-medium uppercase tracking-[0.15em] text-amber-500">Blender Project</span>
                                 <h3 class="text-lg font-medium tracking-tight mt-2 mb-3">Solar System</h3>
-                                <p class="text-sm text-slate-400 leading-relaxed">A complete 3D solar system created in Blender with orbiting & rotation, textures, and lighting.</p>
+                                <p class="text-sm text-slate-400 leading-relaxed">A complete 3D solar system created in Blender with orbiting & rotation, textures, lighting, and an asteroid belt.</p>
                                 <a href="solar.html" class="mt-5 inline-flex items-center gap-2 text-sm text-amber-500 hover:text-amber-400 transition-colors font-medium group">
                                     View Project <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                                 </a>
@@ -107,8 +107,11 @@
                                 </a>
                             </div>
                             <div class="lg:w-[55%] shrink-0">
-                                <div class="video-slot w-full aspect-video rounded-xl flex flex-col items-center justify-center text-slate-600 transition-colors duration-300">
-                                    <i data-lucide="youtube" class="w-10 h-10 mb-2 opacity-50"></i>
+                                <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/5 bg-[#0b0b0c]">
+                                    <video class="absolute inset-0 w-full h-full" controls preload="metadata">
+                                        <source src="rotoscope-videos/side-by-side.mp4" type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
                                 </div>
                             </div>
                         </div>

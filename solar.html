@@ -70,7 +70,7 @@
                     <div class="flex flex-col lg:flex-row gap-8">
                         <div class="lg:w-5/12">
                             <p class="text-slate-400 leading-relaxed">Hi! This is a 3D animation of the Solar System + solo videos of each celestial body, created using Blender 4.5 LTS. 
-                                I created the planets using image textures and a lot of UV Spheres. Although I used a bit of magic using Python scripts for animation and creation for some objects.</p>
+                                I created the planets using image textures and a lot of UV Spheres. Although I used a bit of magic using Python scripts for animation and creation for some objects, including the asteroid belt.</p>
                             <p class="text-slate-400 leading-relaxed mt-4">
                                 I am total beginner in Blender and 3D modeling in general, so I learned a lot while working on this project. I also had a lot of fun creating it and I hope you enjoy watching the videos as much as I enjoyed making them! 
                                 There's an age calculator included below to see your age in different planets. Finished in May 4, 2026. <i class = "text-slate-500 text-sm">References in homepage.</i>
@@ -152,10 +152,10 @@
                     <div id="planetResults" class="hidden space-y-5"></div>
                 </div>
 
-                <!-- Planet Information -->
+                <!-- Celestial Bodies Information -->
                 <div>
                     <h2 class="text-lg font-medium tracking-tight mb-8 flex items-center gap-3">
-                        <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span> Planet Information
+                        <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span> Celestial Bodies Information
                     </h2>
                     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" id="planetInfoGrid"></div>
                 </div>
@@ -166,8 +166,7 @@
                         <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span> Tools & Software Used
                     </h2>
                     <div class="flex flex-wrap gap-3">
-                        <span class="px-4 py-2 bg-[#141414] border border-white/5 rounded-full text-sm text-slate-300 hover:border-amber-500/30 transition-colors">Blender</span>
-                        <span class="px-4 py-2 bg-[#141414] border border-white/5 rounded-full text-sm text-slate-300 hover:border-amber-500/30 transition-colors">Adobe Premiere Pro</span>
+                        <span class="px-4 py-2 bg-[#141414] border border-white/5 rounded-full text-sm text-slate-300 hover:border-amber-500/30 transition-colors">Blender</span>                        
                         
                     </div>
                 </div>
@@ -213,6 +212,7 @@
             ...planets,
             { name: 'Moon', orbitalDays: 27.32, distanceKm: '149.6 million km', color: '#b8bcc6', fact: "Earth’s only natural satellite. It stabilizes Earth’s axial tilt and drives ocean tides." },
             { name: 'Sun', orbitalDays: 0, distanceKm: '0 km', color: '#f59e0b', fact: 'The star at the center of our solar system. It contains 99.8% of the solar system’s mass and powers life on Earth.' },
+            { name: 'Asteroid Belt', type: 'asteroid', color: '#c8a46a', fact: 'A dense region of rocky bodies between Mars and Jupiter. It contains millions of asteroids and fragments.', region: 'Between Mars and Jupiter', composition: 'Rock and metal fragments' },
         ];
 
         const planetVideos = {
@@ -227,6 +227,7 @@
             Pluto: 'blender-videos/pluto.mp4',
             Moon: 'blender-videos/moon.mp4',
             Sun: 'blender-videos/sun.mp4',
+            'Asteroid Belt': 'blender-videos/asteroid-belt.mp4',
         };
 
         const planetPython = {
@@ -265,6 +266,11 @@
             Sun: [
                 { label: 'sun-animation-only.py', file: 'blender-python/sun-animation-only.py' },
                 { label: 'sun-creation.py', file: 'blender-python/sun-creation.py' },
+            ],
+            'Asteroid Belt': [
+                { label: 'asteroid-belt.py', file: 'blender-python/asteroid-belt.py' },
+                { label: 'asteroid-belt-animation.py', file: 'blender-python/asteroid-belt-animation.py' },
+                { label: 'asteroid-belt.blend', file: 'blender-python/asteroid-belt.blend' },
             ],
         };
 
@@ -399,6 +405,19 @@
                             </video>
                         </div>`
                     : '';
+                const stats = p.type === 'asteroid'
+                    ? `
+                        <div class="space-y-1.5 text-xs text-slate-500">
+                            <div class="flex justify-between gap-4"><span>Region</span><span class="text-slate-300 text-right">${p.region}</span></div>
+                            <div class="flex justify-between gap-4"><span>Composition</span><span class="text-slate-300 text-right">${p.composition}</span></div>
+                        </div>
+                        ${pythonDownloads}`
+                    : `
+                        <div class="space-y-1.5 text-xs text-slate-500">
+                            <div class="flex justify-between"><span>Orbit</span><span class="text-slate-300">${p.orbitalDays.toLocaleString()} days</span></div>
+                            <div class="flex justify-between"><span>Distance</span><span class="text-slate-300">${p.distanceKm}</span></div>
+                        </div>
+                        ${pythonDownloads}`;
                 const card = document.createElement('div');
                 card.className = 'bg-[#121212] border border-white/5 rounded-2xl p-5 hover:border-white/10 transition-colors duration-300';
                 card.innerHTML = `
@@ -408,11 +427,7 @@
                         <h3 class="text-base font-medium tracking-tight">${p.name}</h3>
                     </div>
                     <p class="text-sm text-slate-400 leading-relaxed mb-4">${p.fact}</p>
-                    <div class="space-y-1.5 text-xs text-slate-500">
-                        <div class="flex justify-between"><span>Orbit</span><span class="text-slate-300">${p.orbitalDays.toLocaleString()} days</span></div>
-                        <div class="flex justify-between"><span>Distance</span><span class="text-slate-300">${p.distanceKm}</span></div>
-                    </div>
-                    ${pythonDownloads}`;
+                    ${stats}`;
                 grid.appendChild(card);
             });
         }
