@@ -160,6 +160,50 @@
                     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" id="planetInfoGrid"></div>
                 </div>
 
+                <!-- Method Used -->
+                <div>
+                    <h2 class="text-lg font-medium tracking-tight mb-8 flex items-center gap-3">
+                        <span class="w-1.5 h-6 bg-amber-500 rounded-full"></span> Method used:
+                    </h2>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-[#121212] border border-white/5 rounded-2xl p-5 hover:border-white/10 transition-colors duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="w-8 h-8 rounded-full bg-amber-500/15 border border-amber-500/20 text-amber-400 text-sm font-semibold flex items-center justify-center">1</span>
+                                <h3 class="text-base font-semibold tracking-tight">YT Reference</h3>
+                            </div>
+                            <p class="text-sm text-slate-400 leading-relaxed mb-4">I used one of those YT tutorials I have linked in the home page for the general instructions.</p>
+                            <div class="w-full aspect-video rounded-xl overflow-hidden border border-white/5 bg-[#0b0b0c]">
+                                <img src="solar-method/1.png" alt="Reference step" class="w-full h-full object-cover" loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="bg-[#121212] border border-white/5 rounded-2xl p-5 hover:border-white/10 transition-colors duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="w-8 h-8 rounded-full bg-amber-500/15 border border-amber-500/20 text-amber-400 text-sm font-semibold flex items-center justify-center">2</span>
+                                <h3 class="text-base font-semibold tracking-tight">Geometry & Shading
+                                </h3>
+                            </div>
+                            <p class="text-sm text-slate-400 leading-relaxed mb-4">I made a UV sphere and in all tutorials, just adjust nodes in 
+                                    shader editor or in the geometry editor and distort the UV sphere to your liking.</p>
+                            <div class="w-full aspect-video rounded-xl overflow-hidden border border-white/5 bg-[#0b0b0c]">
+                                <img src="solar-method/2.jfif" alt="Roto Brush step" class="w-full h-full object-cover" loading="lazy" />
+                            </div>
+                        </div>
+
+                        <div class="bg-[#121212] border border-white/5 rounded-2xl p-5 hover:border-white/10 transition-colors duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="w-8 h-8 rounded-full bg-amber-500/15 border border-amber-500/20 text-amber-400 text-sm font-semibold flex items-center justify-center">3</span>
+                                <h3 class="text-base font-semibold tracking-tight">Attach textures</h3>
+                            </div>
+                            <p class="text-sm text-slate-400 leading-relaxed mb-4">You can attach images to the UV sphere and there you go. (reference link to textures in landing page)</p>
+                            <div class="w-full aspect-video rounded-xl overflow-hidden border border-white/5 bg-[#0b0b0c]">
+                                <img src="solar-method/3.jfif" alt="Isolate and fill step" class="w-full h-full object-cover" loading="lazy" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Tools & Software -->
                 <div>
                     <h2 class="text-lg font-medium tracking-tight mb-6 flex items-center gap-3">
@@ -274,6 +318,42 @@
             ],
         };
 
+        const planetTextures = {
+            Mercury: [
+                { label: '2k_mercury.jpg', file: 'planet-textures/2k_mercury.jpg' },
+            ],
+            Venus: [
+                { label: '2k_venus_surface.jpg', file: 'planet-textures/2k_venus_surface.jpg' },
+                { label: '2k_venus_atmosphere.jpg', file: 'planet-textures/2k_venus_atmosphere.jpg' },
+            ],
+            Earth: [
+                { label: '2k_earth_daymap.jpg', file: 'planet-textures/2k_earth_daymap.jpg' },
+                { label: '2k_earth_clouds.jpg', file: 'planet-textures/2k_earth_clouds.jpg' },
+            ],
+            Mars: [
+                { label: '2k_mars.jpg', file: 'planet-textures/2k_mars.jpg' },
+            ],
+            Jupiter: [
+                { label: '2k_jupiter.jpg', file: 'planet-textures/2k_jupiter.jpg' },
+            ],
+            Saturn: [
+                { label: '2k_saturn.jpg', file: 'planet-textures/2k_saturn.jpg' },
+                { label: '2k_saturn_ring_alpha.png', file: 'planet-textures/2k_saturn_ring_alpha.png' },
+            ],
+            Uranus: [
+                { label: '2k_uranus.jpg', file: 'planet-textures/2k_uranus.jpg' },
+            ],
+            Neptune: [
+                { label: '2k_neptune.jpg', file: 'planet-textures/2k_neptune.jpg' },
+            ],
+            Moon: [
+                { label: '2k_moon.jpg', file: 'planet-textures/2k_moon.jpg' },
+            ],
+            Sun: [
+                { label: '2k_sun.jpg', file: 'planet-textures/2k_sun.jpg' },
+            ],
+        };
+
         function closeAgeResults() {
             const container = document.getElementById('planetResults');
             container.classList.add('hidden');
@@ -333,6 +413,23 @@
                             </div>
                         </div>`
                     : '';
+
+                const textureFiles = planetTextures[p.name];
+                const textureDownloads = textureFiles?.length
+                    ? `
+                        <div class="mt-4 pt-4 border-t border-white/5">
+                            <div class="text-xs font-medium uppercase tracking-[0.2em] text-slate-500 mb-2">Textures</div>
+                            <div class="flex flex-wrap gap-2">
+                                ${textureFiles.map(x => `
+                                    <a href="${x.file}" download class="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-white/5 hover:bg-white/10 transition-colors">
+                                        <i data-lucide="download" class="w-4 h-4"></i>
+                                        <span>Download ${x.label}</span>
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>`
+                    : '';
+
                 const card = document.createElement('div');
                 card.className = 'bg-[#121212] border border-white/5 rounded-2xl p-5 md:p-6 hover:border-white/10 transition-colors duration-300';
                 card.style.animationDelay = (i * 60) + 'ms';
@@ -368,6 +465,7 @@
                                 </div>
                             </div>
                             ${pythonDownloads}
+                            ${textureDownloads}
                         </div>
                     </div>`;
                 container.appendChild(card);
@@ -396,6 +494,22 @@
                         </div>`
                     : '';
 
+                const textureFiles = planetTextures[p.name];
+                const textureDownloads = textureFiles?.length
+                    ? `
+                        <div class="mt-4 pt-4 border-t border-white/5">
+                            <div class="text-xs font-medium uppercase tracking-[0.2em] text-slate-500 mb-2">Textures</div>
+                            <div class="flex flex-wrap gap-2">
+                                ${textureFiles.map(x => `
+                                    <a href="${x.file}" download class="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold bg-white/5 hover:bg-white/10 transition-colors">
+                                        <i data-lucide="download" class="w-4 h-4"></i>
+                                        <span>Download ${x.label}</span>
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>`
+                    : '';
+
                 const media = planetVideos[p.name]
                     ? `
                         <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-white/5 bg-[#0b0b0c] mb-4">
@@ -411,13 +525,15 @@
                             <div class="flex justify-between gap-4"><span>Region</span><span class="text-slate-300 text-right">${p.region}</span></div>
                             <div class="flex justify-between gap-4"><span>Composition</span><span class="text-slate-300 text-right">${p.composition}</span></div>
                         </div>
-                        ${pythonDownloads}`
+                        ${pythonDownloads}
+                        ${textureDownloads}`
                     : `
                         <div class="space-y-1.5 text-xs text-slate-500">
                             <div class="flex justify-between"><span>Orbit</span><span class="text-slate-300">${p.orbitalDays.toLocaleString()} days</span></div>
                             <div class="flex justify-between"><span>Distance</span><span class="text-slate-300">${p.distanceKm}</span></div>
                         </div>
-                        ${pythonDownloads}`;
+                        ${pythonDownloads}
+                        ${textureDownloads}`;
                 const card = document.createElement('div');
                 card.className = 'bg-[#121212] border border-white/5 rounded-2xl p-5 hover:border-white/10 transition-colors duration-300';
                 card.innerHTML = `
